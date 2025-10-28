@@ -1,5 +1,6 @@
 // lib/models/match_model.dart
 class MatchModel {
+  String? groundImage;
   String? leagueAsset;
   String? team1Logo;
   String? team2Logo;
@@ -28,5 +29,6 @@ class MatchModel {
     this.oddW2,
     this.oddLockedX = false,
     this.oddLockedW2 = false,
+    this.groundImage,
   });
 }

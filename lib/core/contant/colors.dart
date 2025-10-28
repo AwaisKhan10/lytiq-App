@@ -8,3 +8,4 @@ const Color buttonColor = Color(0xff444ED7);
 const Color blueColor = Color(0xff1877F2);
 const Color amberColor = Colors.amber;
 const Color greyColor = Colors.grey;
+const Color lightGreyColor = Color(0xff6A6262);

@@ -1,1 +1,3 @@
-class AppUser {}
+class AppUser {
+
+}

@@ -23,4 +23,5 @@ class AppAssets {
   static String coins = "$iconsAssets/coins.png";
 
   static String laliga = "$dynamicAssets/laliga.png";
+  static String pinIcon = "$iconsAssets/pinIcon.png";
 }

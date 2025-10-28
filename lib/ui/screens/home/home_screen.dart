@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/core/contant/strings.dart';
 import 'package:lytiq/core/contant/text_style.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
+import 'package:lytiq/ui/screens/match_detail_screen/match_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:lytiq/ui/screens/home/home_view_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -119,160 +122,170 @@ class HomeScreen extends StatelessWidget {
                     /// ---- Match Cards ----
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: model.matches.length,
+                      itemCount: model.filteredMatches.length,
+
                       padding: EdgeInsets.zero,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        final match = model.matches[index];
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 15),
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF161233),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              /// League logo
-                              Image.asset(
-                                match.leagueAsset ??
-                                    '$dynamicAssets/laliga.png',
-                                scale: 3,
-                              ),
-                              const SizedBox(height: 10),
+                        final match = model.filteredMatches[index];
 
-                              /// --- Match Row ---
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  /// Team 1
-                                  Flexible(
-                                    child: Row(
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(MatchDetailScreen(matchIndex: index));
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 15),
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF161233),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                /// League logo
+                                Image.asset(
+                                  match.leagueAsset ??
+                                      '$dynamicAssets/laliga.png',
+                                  scale: 3,
+                                ),
+                                const SizedBox(height: 10),
+
+                                /// --- Match Row ---
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    /// Team 1
+                                    Flexible(
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundImage: AssetImage(
+                                              match.team1Logo ?? "",
+                                            ),
+                                          ),
+                                          const SizedBox(width: 6),
+                                          Flexible(
+                                            child: Text(
+                                              match.team1Name ?? "",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+
+                                    /// Score + Status + Time
+                                    Column(
                                       children: [
-                                        CircleAvatar(
-                                          radius: 25,
-                                          backgroundImage: AssetImage(
-                                            match.team1Logo ?? "",
+                                        Text(
+                                          match.score ?? "1 - 0",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22,
                                           ),
                                         ),
-                                        const SizedBox(width: 6),
-                                        Flexible(
-                                          child: Text(
-                                            match.team1Name ?? "",
-                                            style: const TextStyle(
-                                              color: Colors.white,
+                                        const SizedBox(height: 4),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.green.withOpacity(
+                                              0.2,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            "Live",
+                                            style: TextStyle(
+                                              color: Colors.greenAccent,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          match.time ?? "90+",
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: 13,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(width: 20),
+                                    const SizedBox(width: 20),
 
-                                  /// Score + Status + Time
-                                  Column(
-                                    children: [
-                                      Text(
-                                        match.score ?? "1 - 0",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 10,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Colors.green.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          "Live",
-                                          style: TextStyle(
-                                            color: Colors.greenAccent,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        match.time ?? "90+",
-                                        style: const TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(width: 20),
-
-                                  /// Team 2
-                                  Flexible(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 25,
-                                          backgroundImage: AssetImage(
-                                            match.team2Logo ?? "",
-                                          ),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        Flexible(
-                                          child: Text(
-                                            match.team2Name ?? "",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
+                                    /// Team 2
+                                    Flexible(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundImage: AssetImage(
+                                              match.team2Logo ?? "",
                                             ),
-                                            textAlign: TextAlign.right,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(width: 6),
+                                          Flexible(
+                                            child: Text(
+                                              match.team2Name ?? "",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              textAlign: TextAlign.right,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
 
-                              const SizedBox(height: 16),
+                                const SizedBox(height: 16),
 
-                              /// --- Betting Odds Row ---
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _oddBox(
-                                    label: "W1",
-                                    value: "2.912",
-                                    locked: true,
-                                  ),
-                                  _oddBox(
-                                    label: "X",
-                                    value: "3.2",
-                                    locked: true,
-                                  ),
-                                  _oddBox(
-                                    label: "W2",
-                                    value: "2.512",
-                                    locked: true,
-                                  ),
-                                ],
-                              ),
-                            ],
+                                /// --- Betting Odds Row ---
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    _oddBox(
+                                      label: "W1",
+                                      value: "2.912",
+                                      locked: true,
+                                    ),
+                                    _oddBox(
+                                      label: "X",
+                                      value: "3.2",
+                                      locked: true,
+                                    ),
+                                    _oddBox(
+                                      label: "W2",
+                                      value: "2.512",
+                                      locked: true,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

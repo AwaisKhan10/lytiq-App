@@ -16,4 +16,11 @@ class AppAssets {
   static String historyIcon = "$iconsAssets/history.png";
   static String wheelIcon = "$iconsAssets/wheel.png";
   static String supportIcon = "$iconsAssets/support.png";
+
+  ///
+  /// Home Screen
+  ///
+  static String coins = "$iconsAssets/coins.png";
+
+  static String laliga = "$dynamicAssets/laliga.png";
 }

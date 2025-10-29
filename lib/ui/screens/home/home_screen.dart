@@ -9,6 +9,7 @@ import 'package:lytiq/core/contant/strings.dart';
 import 'package:lytiq/core/contant/text_style.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
 import 'package:lytiq/ui/screens/match_detail_screen/match_detail_screen.dart';
+import 'package:lytiq/ui/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:lytiq/ui/screens/home/home_view_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -42,10 +43,15 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const CircleAvatar(
-                                radius: 26,
-                                backgroundImage: NetworkImage(
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVpcCcQNUGyTpt1jjsWPZVrdEvPHO3kr7Tdg&s',
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(ProfileScreen());
+                                },
+                                child: const CircleAvatar(
+                                  radius: 26,
+                                  backgroundImage: NetworkImage(
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVpcCcQNUGyTpt1jjsWPZVrdEvPHO3kr7Tdg&s',
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 10),

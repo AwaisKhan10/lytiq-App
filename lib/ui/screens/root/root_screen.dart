@@ -4,7 +4,10 @@ import 'package:lytiq/core/contant/app_assets.dart';
 import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
 import 'package:lytiq/ui/screens/games/games_screen.dart';
+import 'package:lytiq/ui/screens/history/history_screen.dart';
 import 'package:lytiq/ui/screens/home/home_screen.dart';
+import 'package:lytiq/ui/screens/support/support_screen.dart';
+import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({Key? key}) : super(key: key);
@@ -19,15 +22,9 @@ class _RootScreenState extends State<RootScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     GamesScreen(),
-    const Center(
-      child: Text("Wheel Screen", style: TextStyle(color: Colors.white)),
-    ),
-    const Center(
-      child: Text("History Screen", style: TextStyle(color: Colors.white)),
-    ),
-    const Center(
-      child: Text("Support Screen", style: TextStyle(color: Colors.white)),
-    ),
+    WheelScreen(),
+    HistoryScreen(),
+    SupportScreen(),
   ];
 
   void _onItemTapped(int index) {

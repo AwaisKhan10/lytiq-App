@@ -25,26 +25,6 @@ class GamesScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 18),
-                // top time/status row (optional)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: const [
-                      Text('22:45', style: TextStyle(color: Colors.white70)),
-                      Spacer(),
-                      // small status icons (mobile, wifi, battery) could be left to system
-                    ],
-                  ),
-                ),
-
-                // Date selector
-                DateSelector(
-                  dates: vm.dates,
-                  selectedIndex: vm.selectedDateIndex,
-                  onSelect: vm.selectDate,
-                ),
-
-                const SizedBox(height: 12),
 
                 // Content
                 Expanded(

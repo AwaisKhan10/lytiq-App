@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:lytiq/core/contant/app_assets.dart';
 import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/core/contant/text_style.dart';
@@ -102,17 +103,19 @@ class ProfileScreen extends StatelessWidget {
 
                 20.verticalSpace,
                 Text(
-                  'Profile completion:100%',
+                  'Profile completion:90%',
                   style: style16.copyWith(fontWeight: FontWeight.w500),
                 ),
                 8.verticalSpace,
-                Container(
-                  height: 5.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(36.r),
-                    color: progressBarColor,
-                  ),
+                LinearProgressBar(
+                  minHeight: 5.h,
+                  maxSteps: 10,
+                  progressType: LinearProgressBar
+                      .progressTypeLinear, // Use Linear progress
+                  currentStep: 9,
+                  progressColor: progressBarColor,
+                  backgroundColor: whiteColor,
+                  borderRadius: BorderRadius.circular(39.r), //  NEW
                 ),
                 15.verticalSpace,
                 myAccountFunctions(

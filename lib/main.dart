@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:lytiq/ui/screens/games/games_screen.dart';
-import 'package:lytiq/ui/screens/history/history_screen.dart';
-import 'package:lytiq/ui/screens/home/home_screen.dart';
+import 'package:lytiq/admin_panel/admin_panel_main_screen.dart/main_screen.dart';
+import 'package:lytiq/admin_panel/dash_board_over_view/total_user/total_user_screen.dart';
 import 'package:lytiq/ui/screens/profile/profile_screen.dart';
-import 'package:lytiq/ui/screens/root/root_screen.dart';
-import 'package:lytiq/ui/screens/support/support_screen.dart';
-import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
 import 'package:lytiq/ui/splash_screen.dart';
 
 void main() {

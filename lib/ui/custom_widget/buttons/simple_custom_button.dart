@@ -6,7 +6,13 @@ import 'package:lytiq/core/contant/text_style.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-  const CustomButton({super.key, required this.text, required this.onTap});
+  final Color? color;
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
-          color: buttonColor,
+          color: color ?? buttonColor,
           borderRadius: BorderRadius.circular(12.r),
         ),
         child: Center(child: Text(text, style: style16)),

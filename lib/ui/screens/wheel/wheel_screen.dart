@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:lytiq/core/contant/app_assets.dart';
 import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/core/contant/text_style.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
+import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_screen.dart';
 import 'package:lytiq/ui/screens/support/support_view_model.dart';
 import 'package:lytiq/ui/screens/wheel/wheel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class WheelScreen extends StatelessWidget {
+  final String wheelCoins;
+  const WheelScreen({super.key, required this.wheelCoins});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -81,37 +86,34 @@ class WheelScreen extends StatelessWidget {
                         _ActionButton(
                           text: 'Growth Wheel',
                           onTap: () {
-                            viewModel.isSpinning
-                                ? viewModel.stopSpin()
-                                : viewModel.startSpin();
+                            Get.to(SelectWheelCoinsScreen());
+                            // viewModel.isSpinning
+                            //     ? viewModel.stopSpin()
+                            //     : viewModel.startSpin();
                           },
                           color: darkBlurColor,
                           isPrimary: true,
                         ),
                         10.horizontalSpace,
                         _ActionButton(
-                          text: 'Collect Profit',
-                          onTap: () {},
+                          text: viewModel.isSpinning
+                              ? '${viewModel.currentTime.inHours.toString().padLeft(2, '0')}:${(viewModel.currentTime.inMinutes.remainder(60)).toString().padLeft(2, '0')}:${(viewModel.currentTime.inSeconds.remainder(60)).toString().padLeft(2, '0')}'
+                              : 'Collect Profit',
+                          onTap: () {
+                            if (!viewModel.isSpinning) {
+                              viewModel.startSpin(); // 👈 start 24-hour spin
+                            }
+                          },
                           color: lightGreenColor,
                         ),
                       ],
-                    ),
-                    15.verticalSpace,
-                    _TimerOrProfitDisplay(
-                      duration: viewModel.isSpinning
-                          ? viewModel.currentTime
-                          : null,
-                      text: viewModel.isSpinning
-                          ? null
-                          : '00:59:59', // Initial state text
-                      color: primaryColor,
                     ),
                   ],
                 ),
 
                 15.verticalSpace,
                 Text(
-                  'Collect 0.10 Coin Every 24 Hours',
+                  wheelCoins ?? 'make it correct',
                   style: style16.copyWith(),
                 ),
               ],

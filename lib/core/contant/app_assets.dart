@@ -39,6 +39,7 @@ class AppAssets {
   static String b = "$staticAssets/b.png";
   static String c = "$staticAssets/c.png";
 
+  static String wheelImage2 = "$staticAssets/wheelImage2.png";
   static String city1 = "$dynamicAssets/city1.png";
   static String city2 = "$dynamicAssets/city2.png";
   static String city3 = "$dynamicAssets/city3.png";

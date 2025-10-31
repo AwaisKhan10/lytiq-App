@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:lytiq/admin_panel/admin_panel_main_screen.dart/main_screen.dart';
-import 'package:lytiq/ui/screens/home/home_screen.dart';
-import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
+import 'package:lytiq/ui/screens/root/root_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: WheelScreen(),
+        home: RootScreen(),
       ),
     );
   }

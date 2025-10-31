@@ -6,8 +6,8 @@ import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
 import 'package:lytiq/ui/screens/games/games_screen.dart';
 import 'package:lytiq/ui/screens/history/history_screen.dart';
 import 'package:lytiq/ui/screens/home/home_screen.dart';
+import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_screen.dart';
 import 'package:lytiq/ui/screens/support/support_screen.dart';
-import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _RootScreenState extends State<RootScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     GamesScreen(),
-    WheelScreen(),
+    SelectWheelCoinsScreen(),
     HistoryScreen(),
     SupportScreen(),
   ];

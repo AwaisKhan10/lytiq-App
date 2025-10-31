@@ -18,17 +18,26 @@ class WheelViewModel extends BaseViewModel {
   // --- Timer Control ---
 
   /// Starts the wheel's circulation and initiates the countdown.
+  /// Starts the wheel's circulation and initiates the 24-hour countdown.
   void startSpin() {
-    if (!_isSpinning) {
-      _isSpinning = true;
-      _currentTime = const Duration(
-        minutes: 59,
-        seconds: 59,
-      ); // Reset/Start countdown
-      _startTimer();
-      notifyListeners();
-      debugPrint('Spinning wheel started. Timer initiated.');
-    }
+    if (_isSpinning) return;
+
+    _isSpinning = true;
+    _currentTime = const Duration(hours: 24); // Start from exactly 24 hours
+    notifyListeners();
+
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_currentTime.inSeconds > 0) {
+        _currentTime = _currentTime - const Duration(seconds: 1);
+        notifyListeners();
+      } else {
+        _timer?.cancel();
+        _isSpinning = false;
+        notifyListeners();
+        // When timer reaches 0, "Collect Profit" will appear again
+      }
+    });
   }
 
   /// Stops the wheel's circulation and pauses the countdown.

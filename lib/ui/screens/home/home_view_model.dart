@@ -41,9 +41,9 @@ class HomeViewModel extends BaseViewModel {
       team1Logo: '$dynamicAssets/bvb.png',
       team2Name: 'Barcelona',
       team2Logo: '$dynamicAssets/arsenal.png',
-      score: '5 - 2',
+      score: 'VS',
       status: 'Upcoming',
-      time: '80\'',
+      time: '6:30',
     ),
     MatchModel(
       groundImage: "$dynamicAssets/groundImage.jpg",

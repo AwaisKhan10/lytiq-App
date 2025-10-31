@@ -160,12 +160,12 @@ class HomeScreen extends StatelessWidget {
                                 /// --- Match Row ---
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     /// Team 1
                                     Flexible(
-                                      child: Row(
+                                      child: Column(
                                         children: [
                                           CircleAvatar(
                                             radius: 25,
@@ -173,21 +173,18 @@ class HomeScreen extends StatelessWidget {
                                               match.team1Logo ?? "",
                                             ),
                                           ),
-                                          const SizedBox(width: 6),
-                                          Flexible(
-                                            child: Text(
-                                              match.team1Name ?? "",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              overflow: TextOverflow.ellipsis,
+                                          10.verticalSpace,
+                                          Text(
+                                            match.team1Name ?? "",
+                                            style: style10.copyWith(
+                                              fontWeight: FontWeight.w600,
                                             ),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(width: 20),
+                                    60.horizontalSpace,
 
                                     /// Score + Status + Time
                                     Column(
@@ -214,30 +211,54 @@ class HomeScreen extends StatelessWidget {
                                               12,
                                             ),
                                           ),
-                                          child: const Text(
-                                            "Live",
+                                          child: Text(
+                                            match.status == 'Upcoming'
+                                                ? (match.time ?? '')
+                                                : (match.status ?? ''),
                                             style: TextStyle(
-                                              color: Colors.greenAccent,
+                                              color: statusColor,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          match.time ?? "90+",
-                                          style: const TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 13,
-                                          ),
-                                        ),
+
+                                        const SizedBox(height: 15.0),
+                                        match.status == 'Upcoming'
+                                            ? Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.timer,
+                                                    color: whiteColor,
+                                                  ),
+                                                  5.horizontalSpace,
+                                                  Text(
+                                                    'Reminder',
+                                                    style: style10.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Text(
+                                                match.time ?? "90+",
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 13,
+                                                ),
+                                              ),
                                       ],
                                     ),
                                     const SizedBox(width: 20),
 
                                     /// Team 2
                                     Flexible(
-                                      child: Row(
+                                      child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
@@ -247,18 +268,16 @@ class HomeScreen extends StatelessWidget {
                                               match.team2Logo ?? "",
                                             ),
                                           ),
-                                          const SizedBox(width: 6),
-                                          Flexible(
-                                            child: Text(
-                                              match.team2Name ?? "",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              textAlign: TextAlign.right,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
+                                          10.verticalSpace,
+                                          Text(
+                                            match.team2Name ?? "",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
                                             ),
+                                            textAlign: TextAlign.right,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
                                           ),
                                         ],
                                       ),
@@ -269,27 +288,29 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(height: 16),
 
                                 /// --- Betting Odds Row ---
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    _oddBox(
-                                      label: "W1",
-                                      value: "2.912",
-                                      locked: true,
-                                    ),
-                                    _oddBox(
-                                      label: "X",
-                                      value: "3.2",
-                                      locked: true,
-                                    ),
-                                    _oddBox(
-                                      label: "W2",
-                                      value: "2.512",
-                                      locked: true,
-                                    ),
-                                  ],
-                                ),
+                                match.status == 'Upcoming'
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          _oddBox(
+                                            label: "W1",
+                                            value: "2.912",
+                                            locked: true,
+                                          ),
+                                          _oddBox(
+                                            label: "X",
+                                            value: "3.2",
+                                            locked: true,
+                                          ),
+                                          _oddBox(
+                                            label: "W2",
+                                            value: "2.512",
+                                            locked: true,
+                                          ),
+                                        ],
+                                      ),
                               ],
                             ),
                           ),

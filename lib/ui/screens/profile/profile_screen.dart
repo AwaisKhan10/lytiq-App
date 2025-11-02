@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/state_manager.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
 import 'package:lytiq/core/contant/app_assets.dart';
 import 'package:lytiq/core/contant/colors.dart';
@@ -28,10 +30,15 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: whiteColor,
-                      size: 20,
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: whiteColor,
+                        size: 20,
+                      ),
                     ),
 
                     7.0.horizontalSpace,

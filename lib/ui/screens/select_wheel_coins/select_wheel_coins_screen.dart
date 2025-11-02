@@ -5,7 +5,9 @@ import 'package:get/state_manager.dart';
 import 'package:lytiq/core/contant/app_assets.dart';
 import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/core/contant/text_style.dart';
+import 'package:lytiq/ui/custom_widget/buttons/simple_custom_button.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
+import 'package:lytiq/ui/screens/root/root_screen.dart';
 import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_view_model.dart';
 import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
 import 'package:provider/provider.dart';
@@ -80,12 +82,13 @@ class SelectWheelCoinsScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return CustomSelectWheelCoinsCard(
                           onTap: () {
-                            Get.to(
-                              WheelScreen(
-                                wheelCoins:
-                                    model.selectWheelCoinsList[index].text,
-                              ),
-                            );
+                            _showConfirmationDialog(context, model, index);
+                            // Get.to(
+                            //   WheelScreen(
+                            //     wheelCoins:
+                            //         model.selectWheelCoinsList[index].text,
+                            //   ),
+                            // );
                           },
                           coins: model.selectWheelCoinsList[index],
                         );
@@ -100,6 +103,83 @@ class SelectWheelCoinsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+///
+///. confirmation popUp
+///
+
+void _showConfirmationDialog(
+  BuildContext context,
+  SelectWheelCoinsViewModel model,
+  index,
+) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        backgroundColor: statusColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(Icons.cancel, color: blackColor, size: 30),
+              ),
+              10.verticalSpace,
+
+              Center(
+                child: Text(
+                  model.selectWheelCoinsList[index].coins,
+                  style: style18.copyWith(),
+                ),
+              ),
+              10.verticalSpace,
+              Center(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      model.selectWheelCoinsList[index].text,
+                      style: style18.copyWith(),
+                    ),
+                    SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: Image.asset(AppAssets.coin),
+                    ),
+                  ],
+                ),
+              ),
+              10.verticalSpace,
+              CustomButton(
+                color: ternaryColor,
+                text: "Buy",
+                onTap: () {
+                  // Navigator.pop(context);
+                  // navigator!.pop(context);
+                  Get.offAll(
+                    WheelScreen(
+                      wheelCoins: model.selectWheelCoinsList[index].text,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
 }
 
 ///

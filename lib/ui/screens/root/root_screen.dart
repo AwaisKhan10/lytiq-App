@@ -8,6 +8,8 @@ import 'package:lytiq/ui/screens/history/history_screen.dart';
 import 'package:lytiq/ui/screens/home/home_screen.dart';
 import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_screen.dart';
 import 'package:lytiq/ui/screens/support/support_screen.dart';
+import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
+import 'package:lytiq/ui/screens/wheel/wheel_view_model.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({Key? key}) : super(key: key);
@@ -17,12 +19,13 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
+  // final WheelViewModel model;
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
     HomeScreen(),
     GamesScreen(),
-    SelectWheelCoinsScreen(),
+    WheelScreen(wheelCoins: 'Life time daily return 0.18'),
     HistoryScreen(),
     SupportScreen(),
   ];

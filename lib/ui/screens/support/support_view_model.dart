@@ -6,31 +6,23 @@ class SupportViewModel extends BaseViewModel {
   bool _isSpinning = false;
   Timer? _timer;
 
-  // Initial time set to 59 minutes and 59 seconds for demonstration (matches the UI display)
-  // You can set this to a full 24 hours (Duration(hours: 24)) if needed.
-  Duration _currentTime = const Duration(minutes: 59, seconds: 59);
+  Duration _currentTime = const Duration(hours: 24, minutes: 59, seconds: 59);
 
-  // --- Public Getters ---
+
   bool get isSpinning => _isSpinning;
   Duration get currentTime => _currentTime;
 
-  // --- Timer Control ---
-
-  /// Starts the wheel's circulation and initiates the countdown.
+  // wheel spinning and stopping
   void startSpin() {
     if (!_isSpinning) {
       _isSpinning = true;
-      _currentTime = const Duration(
-        minutes: 59,
-        seconds: 59,
-      ); // Reset/Start countdown
+      _currentTime = const Duration(hours: 24, minutes: 59, seconds: 59);
       _startTimer();
       notifyListeners();
       debugPrint('Spinning wheel started. Timer initiated.');
     }
   }
 
-  /// Stops the wheel's circulation and pauses the countdown.
   void stopSpin() {
     if (_isSpinning) {
       _isSpinning = false;
@@ -42,7 +34,6 @@ class SupportViewModel extends BaseViewModel {
   }
 
   void _startTimer() {
-    // Cancel any existing timer to ensure only one is active
     _timer?.cancel();
 
     // Timer fires every second
@@ -62,8 +53,7 @@ class SupportViewModel extends BaseViewModel {
 
   @override
   void dispose() {
-    _timer
-        ?.cancel(); // Ensure the timer is canceled when the ViewModel is disposed
+    _timer?.cancel();
     super.dispose();
   }
 }

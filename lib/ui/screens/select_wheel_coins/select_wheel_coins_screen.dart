@@ -10,6 +10,7 @@ import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
 import 'package:lytiq/ui/screens/root/root_screen.dart';
 import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_view_model.dart';
 import 'package:lytiq/ui/screens/wheel/wheel_screen.dart';
+import 'package:lytiq/ui/screens/wheel/wheel_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SelectWheelCoinsScreen extends StatelessWidget {
@@ -164,14 +165,23 @@ void _showConfirmationDialog(
               CustomButton(
                 color: ternaryColor,
                 text: "Buy",
-                onTap: () {
-                  // Navigator.pop(context);
-                  // navigator!.pop(context);
-                  Get.offAll(
-                    WheelScreen(
-                      wheelCoins: model.selectWheelCoinsList[index].text,
-                    ),
+                // onTap: () {
+                //   // Navigator.pop(context);
+                //   // navigator!.pop(context);
+                //   Get.offAll(
+                //     WheelScreen(
+                //       wheelCoins: model.selectWheelCoinsList[index].text,
+                //     ),
+                //   );
+                // },
+                  onTap: () {
+                  // Update the shared WheelViewModel and go back to RootScreen showing the Wheel tab
+                  WheelViewModel.instance.setSelectedWheelText(
+                    model.selectWheelCoinsList[index].text,
                   );
+
+                  // Navigate back to root and show wheel tab (index 2)
+                  Get.offAll(RootScreen(initialIndex: 2));
                 },
               ),
             ],

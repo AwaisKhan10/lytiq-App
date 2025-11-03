@@ -4,21 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:lytiq/core/others/base_view_model.dart';
 
 class WheelViewModel extends BaseViewModel {
+  WheelViewModel._internal();
+  static final WheelViewModel instance = WheelViewModel._internal();
+  factory WheelViewModel() => instance;
   bool _isSpinning = false;
   Timer? _timer;
-
-  // Initial time set to 59 minutes and 59 seconds for demonstration (matches the UI display)
-  // You can set this to a full 24 hours (Duration(hours: 24)) if needed.
   Duration _currentTime = const Duration(minutes: 59, seconds: 59);
-
-  // --- Public Getters ---
   bool get isSpinning => _isSpinning;
   Duration get currentTime => _currentTime;
 
-  // --- Timer Control ---
-
-  /// Starts the wheel's circulation and initiates the countdown.
-  /// Starts the wheel's circulation and initiates the 24-hour countdown.
   void startSpin() {
     if (_isSpinning) return;
 
@@ -75,5 +69,16 @@ class WheelViewModel extends BaseViewModel {
     _timer
         ?.cancel(); // Ensure the timer is canceled when the ViewModel is disposed
     super.dispose();
+  }
+
+  ///
+  ///. when user want to go back from wheel screen so user will go back to root screen but to index 3
+  ///
+  // --- Public Setter for selected wheel text ---
+  String _selectedWheelText = 'Life time daily return 0.18';
+  String get selectedWheelText => _selectedWheelText;
+  void setSelectedWheelText(String text) {
+    _selectedWheelText = text;
+    notifyListeners();
   }
 }

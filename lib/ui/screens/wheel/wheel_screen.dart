@@ -1,3 +1,4 @@
+// ...existing code...
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -7,7 +8,6 @@ import 'package:lytiq/core/contant/colors.dart';
 import 'package:lytiq/core/contant/text_style.dart';
 import 'package:lytiq/ui/custom_widget/custom_scaffold/custom_scaffold.dart';
 import 'package:lytiq/ui/screens/select_wheel_coins/select_wheel_coins_screen.dart';
-import 'package:lytiq/ui/screens/support/support_view_model.dart';
 import 'package:lytiq/ui/screens/wheel/wheel_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +16,10 @@ class WheelScreen extends StatelessWidget {
   const WheelScreen({super.key, required this.wheelCoins});
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SupportViewModel(),
-      child: Consumer<SupportViewModel>(
+    // Provide the shared WheelViewModel instance so the wheel UI can react to changes
+    return ChangeNotifierProvider<WheelViewModel>.value(
+      value: WheelViewModel.instance,
+      child: Consumer<WheelViewModel>(
         builder: (context, viewModel, child) => CustomScaffold(
           showAppBar: true,
           body: Padding(
@@ -112,10 +113,8 @@ class WheelScreen extends StatelessWidget {
                 ),
 
                 15.verticalSpace,
-                Text(
-                  wheelCoins ?? 'make it correct',
-                  style: style16.copyWith(),
-                ),
+                // Prefer the ViewModel's selected text so it always reflects the latest selection.
+                Text(viewModel.selectedWheelText, style: style16.copyWith()),
               ],
             ),
           ),
@@ -126,7 +125,7 @@ class WheelScreen extends StatelessWidget {
 }
 
 class _SpinningWheel extends StatefulWidget {
-  final SupportViewModel viewModel;
+  final WheelViewModel viewModel;
 
   const _SpinningWheel({required this.viewModel});
 
@@ -215,6 +214,7 @@ class _SpinningWheelState extends State<_SpinningWheel>
     );
   }
 }
+// ...existing code...
 
 class _ActionButton extends StatelessWidget {
   final String text;

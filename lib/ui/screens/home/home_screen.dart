@@ -355,12 +355,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTab(
-    HomeViewModel model,
-    String title,
-    int index, {
-    bool hasDot = false,
-  }) {
+  Widget _buildTab(HomeViewModel model, String title, int index) {
     final isActive = model.selectedTab == index;
 
     return GestureDetector(

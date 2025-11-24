@@ -333,43 +333,25 @@ class HomeScreen extends StatelessWidget {
     required String value,
     bool locked = false,
   }) {
-    return Stack(
-      alignment: Alignment.topRight,
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  color: greyColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(value, style: const TextStyle(color: blackColor)),
-            ],
-          ),
-        ),
-        if (locked) ...[
-          const SizedBox(width: 4),
-          Positioned(
-            top: -6,
-            child: CircleAvatar(
-              backgroundColor: Color(0xffD9D9D9),
-              foregroundColor: Color(0xffD9D9D9),
-              radius: 10,
-              child: const Icon(Icons.lock, size: 12, color: Color(0xff6A6262)),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              color: greyColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
+          const SizedBox(width: 8),
+          Text(value, style: const TextStyle(color: blackColor)),
         ],
-      ],
+      ),
     );
   }
 

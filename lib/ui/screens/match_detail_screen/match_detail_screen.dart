@@ -248,7 +248,7 @@ class _BettingSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 22),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -276,10 +276,10 @@ class _BettingSection extends StatelessWidget {
               ),
             ],
           ),
-          12.verticalSpace,
+
           Wrap(
             spacing: 10,
-            runSpacing: 10,
+            runSpacing: 50,
             children: options.map((opt) {
               return Container(
                 width:

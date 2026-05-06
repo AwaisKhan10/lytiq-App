@@ -282,7 +282,7 @@ class _TimerOrProfitDisplay extends StatelessWidget {
 
     // --- CRITICAL CHANGE 2: Update formatting to HH:MM:SS ---
     if (duration != null) {
-      String hours = duration!.inHours.remainder(24).toString().padLeft(2, '0');
+      String hours = duration!.inHours.toString().padLeft(2, '0');
       String minutes = duration!.inMinutes
           .remainder(60)
           .toString()

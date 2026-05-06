@@ -97,18 +97,23 @@ class WheelScreen extends StatelessWidget {
                         ),
                         10.horizontalSpace,
                         _ActionButton(
-                          text: viewModel.isSpinning
-                              ? '${viewModel.currentTime.inHours.toString().padLeft(2, '0')}:${(viewModel.currentTime.inMinutes.remainder(60)).toString().padLeft(2, '0')}:${(viewModel.currentTime.inSeconds.remainder(60)).toString().padLeft(2, '0')}'
-                              : 'Collect Profit',
+                          text: viewModel.isSpinning ? 'Mining...' : 'Collect Profit',
                           onTap: () {
                             if (!viewModel.isSpinning) {
                               viewModel.startSpin(); // 👈 start 24-hour spin
                             }
                           },
-                          color: lightGreenColor,
+                          color: viewModel.isSpinning ? Colors.grey.shade600 : lightGreenColor,
                         ),
                       ],
                     ),
+                    if (viewModel.isSpinning) ...[
+                      25.verticalSpace,
+                      _TimerOrProfitDisplay(
+                        duration: viewModel.currentTime,
+                        color: whiteColor,
+                      ),
+                    ],
                   ],
                 ),
 
@@ -269,7 +274,7 @@ class _TimerOrProfitDisplay extends StatelessWidget {
   final String? text;
   final Color color;
 
-  const _TimerOrProfitDisplay({this.duration, this.text, required this.color});
+  const _TimerOrProfitDisplay({this.text, required this.color, this.duration});
 
   @override
   Widget build(BuildContext context) {

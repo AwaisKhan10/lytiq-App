@@ -97,13 +97,17 @@ class WheelScreen extends StatelessWidget {
                         ),
                         10.horizontalSpace,
                         _ActionButton(
-                          text: viewModel.isSpinning ? 'Mining...' : 'Collect Profit',
+                          text: viewModel.isSpinning
+                              ? 'Mining...'
+                              : 'Collect Profit',
                           onTap: () {
                             if (!viewModel.isSpinning) {
                               viewModel.startSpin(); // 👈 start 24-hour spin
                             }
                           },
-                          color: viewModel.isSpinning ? Colors.grey.shade600 : lightGreenColor,
+                          color: viewModel.isSpinning
+                              ? Colors.grey.shade600
+                              : lightGreenColor,
                         ),
                       ],
                     ),
@@ -291,6 +295,7 @@ class _TimerOrProfitDisplay extends StatelessWidget {
           .remainder(60)
           .toString()
           .padLeft(2, '0');
+      //
 
       // Use HH:MM:SS format
       displayString = '$hours:$minutes:$seconds';
